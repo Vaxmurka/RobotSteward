@@ -4,6 +4,7 @@
 
 #ifndef ADUINO_HEAD_H
 #define ADUINO_HEAD_H
+#include <Arduino.h>
 
 #include <Multiservo.h>
 #include "defs.h"
@@ -19,30 +20,34 @@ public:
     void rotate(int x, int y);
     void rotateX(int x);
     void rotateY(int y);
+    void stop();
 
-    void getState();
+    bool getState();
 private:
+    void tickX();
+    void tickY();
     Multiservo* servo;
-    bool headLoopRunning = false;
+    bool headLoopRunning = false, servoLoopRunning = false;
     bool stateX = false;
 
     unsigned long lowTimer;
 
     bool endFlag = false, dir, awaitFlag = false;
+    bool deltaSign = false;
 
     int targetTickX = 0, targetY = 0; // Будущее положение
-    int currentX = 0, currentY = 0;  // Текущие углы
+    int currentX = 0, currentY = 0;   // Текущие углы
     const float angleTicks = MAX_TICK / (float)(headInputRight + abs(headInputLeft));
+    int countY = 0;
 
-    byte power = 250;
+    byte power = 255;
 
+    void zero();
     bool isEnd() {
         return !digitalRead(END_CAP);
     }
-    void isr() {
-        enc.tickISR();
-    }
 
+    static void isr();
 };
 
 

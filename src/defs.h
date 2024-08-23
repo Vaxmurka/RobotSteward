@@ -22,10 +22,12 @@
 #define headInputLeft  -165
 
 // Подключаем энкодер
-#define CLK 2
-#define DT  3
+// #define CLK 2
+// #define DT  3
+const byte CLK = 2;
+const byte DT = 3;
 #define END_CAP 22 // Коневик на голову
 
-#define MAX_TICK 687
+#define MAX_TICK 11090
 
 #endif //ADUINO_DEFS_H

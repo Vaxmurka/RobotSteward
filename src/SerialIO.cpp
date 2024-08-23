@@ -1,8 +1,10 @@
 #include "Arduino.h"
 #include "SerialIO.h"
 
+#define IOSerial Serial
+
 SerialIO::SerialIO() {
-  Serial.begin(9600);
+  IOSerial.begin(115200);
 }
 
 const char REQUEST_PREFIX = '?';
@@ -30,22 +32,22 @@ struct Message SerialIO::produceMessage(byte type, String code, int a0, int a1, 
 
 void SerialIO::sendMessage(struct Message message) {
   if (message.type == RESPONSE) {
-    Serial.print('!');
+    IOSerial.print('!');
   }
-  Serial.print(message.code);
+  IOSerial.print(message.code);
   for (int i = 0; i < countArgs(message.args); i++) {
-    Serial.print(" ");
-    Serial.print(String(message.args[i]));
+    IOSerial.print(" ");
+    IOSerial.print(String(message.args[i]));
   }
-  Serial.println();
+  IOSerial.println();
 }
 
 void SerialIO::sendConfirmation() {
-  Serial.println("+");
+  IOSerial.println("+");
 }
 
 void SerialIO::sendCompletion() {
-  Serial.println("OK");
+  IOSerial.println("OK");
 }
 
 int SerialIO::countArgs(int args[]) {
@@ -59,8 +61,8 @@ int SerialIO::countArgs(int args[]) {
 
 // читает все символы до '\n' и добавляет их в буффер. Если символ означает конец команды - возвращает всю команду БЕЗ ЭТОГО СИМВОЛА.
 String SerialIO::readSerial() {
-  while (Serial.available()) {
-    char symbol = char(Serial.read());
+  while (IOSerial.available()) {
+    char symbol = char(IOSerial.read());
 
     if (symbol == '\n') {
       String _buffer = buffer;

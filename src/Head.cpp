@@ -3,14 +3,20 @@
 //
 
 #include "Head.h"
+#include <Arduino.h>
 
 #include <Multiservo.h>
 
+#include "defs.h"
 #include <EncButton.h>
 EncButton enc(CLK, DT);
 
 Head::Head(Multiservo* _servo) {
     servo = _servo;
+}
+
+static void Head::isr() {
+  enc.tickISR();
 }
 
 void Head::begin() {
@@ -20,77 +26,92 @@ void Head::begin() {
     pinMode(22, INPUT_PULLUP);
 
 //    servo.attach(7);
-
-    analogWrite(EN_Head, power);
-
     attachInterrupt(0, isr, CHANGE);
     attachInterrupt(1, isr, CHANGE);
     enc.setEncISR(true);
+
+    analogWrite(EN_Head, power);
 }
 
+// void Head::tick() {
+//     enc.tick();
+//     if (isEnd()) {
+//       if (!endFlag) {
+//         currentX = headInputLeft;
+//         endFlag = true;
+//       } else endFlag = false;
+//     }
+
+//     if (!headLoopRunning) return;
+
+//     if ((-enc.counter - targetTickX > 0) != deltaSign) {
+//         stop();
+//         return;
+//     }
+//     deltaSign = -enc.counter - targetTickX > 0;
+
+//     digitalWrite(PIN_IN1_head, dir ? HIGH : LOW);
+//     digitalWrite(PIN_IN2_head, dir ? LOW : HIGH);
+
+//     stateX = false;
+//     analogWrite(EN_Head, power);
+// }
 void Head::tick() {
+  tickX();
+  tickY();
+}
+
+void Head::tickX() {
     enc.tick();
     if (isEnd()) {
-        if (!endFlag) {
-            targetTick = 0;
-            endFlag = true;
-        }
-    } else endFlag = false;
+      if (!endFlag) {
+        currentX = headInputLeft;
+        endFlag = true;
+      } else endFlag = false;
+    }
 
     if (!headLoopRunning) return;
 
-    if (abs(enc.counter) == targetTickX) {
-        digitalWrite(PIN_IN1_head, LOW);
-        digitalWrite(PIN_IN2_head, LOW);
-
-        stateX = true;
-        awaitFlag = false;
-        headLoopRunning = false;
+    if ((-enc.counter - targetTickX > 0) != deltaSign) {
+        stop();
+        return;
     }
+    deltaSign = -enc.counter - targetTickX > 0;
+    digitalWrite(PIN_IN1_head, dir ? HIGH : LOW);
+    digitalWrite(PIN_IN2_head, dir ? LOW : HIGH);
 
-    if (abs(enc.counter) == targetTickX - 50 || abs(enc.counter) == targetTickX + 50) {
-        awaitFlag = true;
-        lowTimer = millis();
-    }
+    stateX = false;
+    analogWrite(EN_Head, power);
+}
 
+void Head::tickY() {
+  if (!servoLoopRunning) return;
 
-    if (abs(enc.counter) < targetTickX) {
-        byte _power = power;
+  // if ()
+}
 
-        digitalWrite(PIN_IN1_head, dir ? HIGH : LOW);
-        digitalWrite(PIN_IN2_head, dir ? LOW : HIGH);
+void Head::zero() {
+  if (isEnd()) {
+      currentX = headInputLeft;
+      endFlag = true;
+      return;
+  }
 
-        stateX = false;
+  analogWrite(EN_Head, power);
+  while (!isEnd()) {
+      digitalWrite(PIN_IN1_head, LOW);
+      digitalWrite(PIN_IN2_head, HIGH);
+  }
+  enc.counter = 0;
+  digitalWrite(PIN_IN1_head, LOW);
+  digitalWrite(PIN_IN2_head, LOW);
 
-        if (awaitFlag && millis() - lowTimer > 50) {
-            lowTimer = millis();
-            if (_power -= 5 < 180) _power = 180;
-        }
-
-        analogWrite(EN_Head, _power);
-    }
-
+  currentX = headInputLeft;
+  endFlag = true;
 }
 
 void Head::home() {
-    if (isEnd()) {
-        currentX = headInputLeft;
-        endFlag = true;
-        return;
-    }
-
-    analogWrite(EN_Head, power);
-    while (!isEnd()) {
-        digitalWrite(PIN_IN1_head, LOW);
-        digitalWrite(PIN_IN2_head, HIGH);
-    }
-    enc.counter = 0;
-    digitalWrite(PIN_IN1_head, LOW);
-    digitalWrite(PIN_IN2_head, LOW);
-
-    currentX = headInputLeft;
-    endFlag = true;
-
+    zero();
     rotate(0, 0);
 }
 
@@ -100,29 +121,44 @@ void Head::rotate(int x, int y) {
 }
 
 void Head::rotateX(int x) {
-    currentX += round(enc.counter / angleTicks);
+    currentX += round(-enc.counter / angleTicks);
     int targetAngle = x - currentX;
-//    Serial.println("Enc " + String(enc.counter) + " " + String(last_x));
     enc.counter = 0;
     targetTickX = round(targetAngle * angleTicks);
+    deltaSign = -enc.counter - targetTickX > 0;
+
 
     if (targetTickX < 0) dir = false;
     else dir = true;
-    targetTickX = abs(targetTickX);
 
-    awaitFlag = false;
+    // awaitFlag = false;
     headLoopRunning = true;
-//    Serial.println("rotateX " +  String(targetTick));
 }
 
 void Head::rotateY(int y) {
     if (y == 0) targetY = HeadCenter;
     else targetY = map(y, headInputDown, headInputUp, HeadDown, HeadUp);
 
-    Serial.println(String(absAngle) + " - " + String(targetY));
-    servo.write(targetY);
+    countY = currentY - targetY;
+    servoLoopRunning = true;
+    servo->write(targetY);
 }
 
-void Head::getState() {
-    return stateX;
+void Head::stop() {
+  digitalWrite(PIN_IN1_head, LOW);
+  digitalWrite(PIN_IN2_head, LOW);
+
+  stateX = true;
+  headLoopRunning = false;
+
+  currentX += round(-enc.counter / angleTicks);
+  enc.counter = 0;
+}
+
+bool Head::getState() {
+    if (stateX) {
+      stateX = false;
+      return true;
+    }
+    return false;
 }
