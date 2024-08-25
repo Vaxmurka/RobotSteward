@@ -126,7 +126,7 @@ void setup() {
 void loop() {
     head.tick();
 
-    if (head.getState()) {
+    if (head.getState('x') && get.getState('y')) {
       if (!getReady) {
         Serial.println("READY");
         getReady = true;

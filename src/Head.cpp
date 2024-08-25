@@ -90,6 +90,7 @@ void Head::tickY() {
   if (currentY+counterY == targetY) {
     // Serial.println("STOP");
     currentY = targetY;
+    stateY = true;
     servoLoopRunning = false;
     return;
   }
@@ -102,6 +103,7 @@ void Head::tickY() {
     servo->write(currentY+counterY);
     // Serial.println(String(currentY+counterY));
   }
+  stateY = false;
 }
 
 void Head::zero() {
@@ -181,10 +183,18 @@ void Head::stop() {
   enc.counter = 0;
 }
 
-bool Head::getState() {
+bool Head::getState(char axis) {
+  if (axis == 'x') {
     if (stateX) {
       stateX = false;
       return true;
     }
     return false;
+  } else {
+    if (stateY) {
+      stateY = false;
+      return true;
+    }
+    return false;
+  }
 }

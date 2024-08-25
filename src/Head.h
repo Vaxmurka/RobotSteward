@@ -28,7 +28,7 @@ private:
     void tickY();
     Multiservo* servo;
     bool headLoopRunning = false, servoLoopRunning = false;
-    bool stateX = false;
+    bool stateX = false, stateY = false;
 
     unsigned long tmrY;
 
