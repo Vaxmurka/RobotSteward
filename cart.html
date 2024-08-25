@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <title>Корзина</title>
+</head>
+<body>
+<header class="header">
+    <div class="header__inner container">
+        <a href="" class="header__logo logo">
+            <img src="./images/logo1.svg" alt="Logo" class="logo__image"
+                 width="142" height="42" loading="lazy">
+        </a>
+        <nav class="header__menu hidden-mobile">
+            <ul class="header__menu-list">
+                <li class="header__menu-item">
+                    <a href="index.html" class="header__menu-link">Главная</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="" class="header__menu-link">О нас</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="shop.html" class="header__menu-link">Магазин</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="" class="header__menu-link">Профиль</a>
+                </li>
+                <li class="header__menu-item header__menu-accent">
+                    <a href="cart.html" class="header__menu-link"><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="header__menu-svg">
+                            <path d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z" stroke="#1C274C" stroke-width="1.5"/>
+                            <path d="M16.5 18.0001C17.3284 18.0001 18 18.6716 18 19.5001C18 20.3285 17.3284 21.0001 16.5 21.0001C15.6716 21.0001 15 20.3285 15 19.5001C15 18.6716 15.6716 18.0001 16.5 18.0001Z" stroke="#1C274C" stroke-width="1.5"/>
+                            <path d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <button class="button__burger-menu burger-button visible-mobile" type="button"
+                onclick="mobileOverlay.showModal()">
+            <span class="visually-hidden">Open navigation menu</span>
+        </button>
+    </div>
+</header>
+
+<section class="cart">
+    <div class="cart__block">
+        <div class="cart__block_image">
+            <img src="/images/shop/iceCreamChoc.jpg" alt="iceCreamChoc" class="cart__block_image">
+        </div>
+        <div class="cart__block_block1">
+            <p class="cart__block_text">Шоколодное мороженное</p>
+            <div class="cart__block_block2">
+                <p class="cart__block_price">20 000 ₽</p>
+                <div class="cart__block_quantity">
+                    <button class="cart__block_quantity-btn cart__block_quantity-minus">-</button>
+                    <p class="cart__block_quantity-text">1</p>
+                    <button class="cart__block_quantity-btn cart__block_quantity-plus">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart__total">
+<!--        <hr class="card__total_line">-->
+        <div class="cart__total_line"></div>
+        <div class="cart__total_inner">
+            <p class="cart__total_inner-price">Итого: <span>40 000 ₽</span></p>
+            <button class="cart__total_inner-btn">Оформить заказ</button>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer__inner">
+        <b class="footer__inner_name">Робот-стюард</b> 2024<br>
+        © ГБОУ ДО СО СОЦДЮТТ Тольяттинский ДТ "Кванториум-63 регион"
+    </div>
+</footer>
+
+<dialog class="mobile-overlay visible-mobile" id="mobileOverlay">Меню
+    <form class="mobile-overlay__close-button-wrapper" method="dialog">
+        <button class="mobile-overlay__close-button cross-button" type="submit">
+            <span class="visually-hidden">Close navigation menu</span>
+        </button>
+    </form>
+    <div class="mobile-overlay__body">
+        <ul class="mobile-overlay__list">
+            <li class="mobile-overlay-item">
+                <a href="index.html" class="mobile-overlay__link">Главная</a>
+            </li>
+            <li class="mobile-overlay-item">
+                <a href="" class="mobile-overlay__link">О нас</a>
+            </li>
+            <li class="mobile-overlay-item">
+                <a href="shop.html" class="mobile-overlay__link">Магаин</a>
+            </li>
+            <li class="mobile-overlay-item">
+                <a href="" class="mobile-overlay__link">Профиль</a>
+            </li>
+            <li class="mobile-overlay-item">
+                <a href="cart.html" class="mobile-overlay__link"><?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mobile-overlay_svg">
+                        <path d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z" stroke="#1C274C" stroke-width="1.5"/>
+                        <path d="M16.5 18.0001C17.3284 18.0001 18 18.6716 18 19.5001C18 20.3285 17.3284 21.0001 16.5 21.0001C15.6716 21.0001 15 20.3285 15 19.5001C15 18.6716 15.6716 18.0001 16.5 18.0001Z" stroke="#1C274C" stroke-width="1.5"/>
+                        <path d="M2 3L2.26121 3.09184C3.5628 3.54945 4.2136 3.77826 4.58584 4.32298C4.95808 4.86771 4.95808 5.59126 4.95808 7.03836V9.76C4.95808 12.7016 5.02132 13.6723 5.88772 14.5862C6.75412 15.5 8.14857 15.5 10.9375 15.5H12M16.2404 15.5C17.8014 15.5 18.5819 15.5 19.1336 15.0504C19.6853 14.6008 19.8429 13.8364 20.158 12.3075L20.6578 9.88275C21.0049 8.14369 21.1784 7.27417 20.7345 6.69708C20.2906 6.12 18.7738 6.12 17.0888 6.12H11.0235M4.95808 6.12H7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg></a>
+            </li>
+        </ul>
+    </div>
+</dialog>
+
+<!--<dialog id="dialog">-->
+<!--    <div class="shop__dialog">-->
+<!--        <div class="shop__dialog_image">-->
+<!--            <img src="/images/shop/Cookie.jpg" alt="cookie">-->
+<!--        </div>-->
+<!--        <div class="shop__dialog_content">-->
+<!--            <div class="shop__dialog_content-text">-->
+<!--                <h1>Печенька</h1>-->
+<!--                <h2>должна быть вкусной</h2>-->
+<!--            </div>-->
+<!--            <div class="shop__dialog_content-priceBtn">-->
+<!--                <div class="shop__price">-->
+<!--                    <h3 class="shop__price_new">16 000 ₽</h3>-->
+<!--                </div>-->
+<!--                <button type="button">Приобрести</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>-->
+<!--</dialog>-->
+
+</body>
+</html>
