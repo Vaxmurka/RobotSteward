@@ -4,6 +4,9 @@
     width: 730px;
   }
   @include mobile {
+    width: 550px;
+  }
+  @include mobile-s {
     width: 450px;
   }
   &__profile {
@@ -98,7 +101,7 @@
 
         span {
           color: var(--color-red);
-          font-size: 30px;
+          font-size: 29px;
           font-family: "Inter", sans-serif;
           font-weight: 600;
           font-style: normal;

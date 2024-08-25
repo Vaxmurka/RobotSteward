@@ -586,6 +586,11 @@ span {
 }
 @media (max-width: 767px) {
   .infoProfile {
+    width: 550px;
+  }
+}
+@media (max-width: 540px) {
+  .infoProfile {
     width: 450px;
   }
 }
@@ -672,7 +677,7 @@ span {
 }
 .infoProfile__info_info1-city span {
   color: var(--color-red);
-  font-size: 30px;
+  font-size: 29px;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-style: normal;
