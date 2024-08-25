@@ -87,7 +87,21 @@ void Head::tickX() {
 void Head::tickY() {
   if (!servoLoopRunning) return;
 
-  // if ()
+  if (currentY+counterY == targetY) {
+    // Serial.println("STOP");
+    currentY = targetY;
+    servoLoopRunning = false;
+    return;
+  }
+
+  if (millis() - tmrY > 10) {
+    tmr = millis();
+    if (dirY) counterY++;
+    else counterY--;
+
+    servo->write(currentY+counterY);
+    // Serial.println(String(currentY+counterY));
+  }
 }
 
 void Head::zero() {
@@ -139,9 +153,15 @@ void Head::rotateY(int y) {
     if (y == 0) targetY = HeadCenter;
     else targetY = map(y, headInputDown, headInputUp, HeadDown, HeadUp);
 
-    countY = currentY - targetY;
+    if (targetY - currentY > 0) dirY = true;
+    else dirY = false;
+    counterY = 0;
+
+    Serial.println("ABS inputAngle: " + String(y) + " lastAngle " + String(currentY) + " outputAngle: " + String(targetY) + " dir " + String(dirY));
+    // current = target;
+
+    tmrY = millis();
     servoLoopRunning = true;
-    servo->write(targetY);
 }
 
 void Head::stop() {

@@ -30,15 +30,15 @@ private:
     bool headLoopRunning = false, servoLoopRunning = false;
     bool stateX = false;
 
-    unsigned long lowTimer;
+    unsigned long tmrY;
 
-    bool endFlag = false, dir, awaitFlag = false;
+    bool endFlag = false, dir, dirY, awaitFlag = false;
     bool deltaSign = false;
 
     int targetTickX = 0, targetY = 0; // Будущее положение
     int currentX = 0, currentY = 0;   // Текущие углы
     const float angleTicks = MAX_TICK / (float)(headInputRight + abs(headInputLeft));
-    int countY = 0;
+    int counterY;
 
     byte power = 255;
 
