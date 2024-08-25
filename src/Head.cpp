@@ -135,6 +135,9 @@ void Head::rotate(int x, int y) {
 }
 
 void Head::rotateX(int x) {
+    if (x > 160) x = 160;
+    if (x < -165) x = -165;
+    
     currentX += round(-enc.counter / angleTicks);
     int targetAngle = x - currentX;
     enc.counter = 0;
@@ -150,6 +153,9 @@ void Head::rotateX(int x) {
 }
 
 void Head::rotateY(int y) {
+    if (y > 20) y = 20;
+    if (y < -10) y = -10;
+    
     if (y == 0) targetY = HeadCenter;
     else targetY = map(y, headInputDown, headInputUp, HeadDown, HeadUp);
 
