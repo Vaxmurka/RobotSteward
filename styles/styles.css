@@ -707,6 +707,14 @@ span {
   gap: 20px;
   justify-items: center;
 }
+.infoProfile__info_info2-elem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  row-gap: 5px;
+}
 
 :root {
   --vs-primary: 29 92 255;
