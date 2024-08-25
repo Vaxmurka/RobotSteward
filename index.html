@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
+    <title>Главная</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__inner container">
+            <a href="" class="header__logo logo">
+                <img src="./images/logo1.svg" alt="Logo" class="logo__image"
+                     width="142" height="42" loading="lazy">
+            </a>
+            <nav class="header__menu hidden-mobile">
+                <ul class="header__menu-list">
+                    <li class="header__menu-item">
+                        <a href="" class="header__menu-link header__menu-accent">Главная</a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="" class="header__menu-link">О нас</a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="shop.html" class="header__menu-link">Магазин</a>
+                    </li>
+                    <li class="header__menu-item">
+                        <a href="" class="header__menu-link">Профиль</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <button class="button__burger-menu burger-button visible-mobile" type="button"
+                    onclick="mobileOverlay.showModal()">
+                <span class="visually-hidden">Open navigation menu</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="index">
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/shop.jpg" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Заказ еды из вагона бистро
+                </p>
+            </div>
+        </div>
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/suvenir.png" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Выбор сувениров компании
+                </p>
+            </div>
+        </div>
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/taksi.jpg" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Заказ такси
+                </p>
+            </div>
+        </div>
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/hotel.jpg" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Бронирование отелей
+                </p>
+            </div>
+        </div>
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/excursion.jpg" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Плонирование экскурсии
+                </p>
+            </div>
+        </div>
+        <div class="index__card">
+            <div class="index__card_image">
+                <img src="images/index/train.jpg" alt="shop">
+            </div>
+            <div class="index__content">
+                <p class="index__content_text">
+                    Оказание услуг в поезде
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <b class="footer__inner_name">Робот-стюард</b> 2024<br>
+            © ГБОУ ДО СО СОЦДЮТТ Тольяттинский ДТ "Кванториум-63 регион"
+        </div>
+    </footer>
+
+    <dialog class="mobile-overlay visible-mobile" id="mobileOverlay">Меню
+        <form class="mobile-overlay__close-button-wrapper" method="dialog">
+            <button class="mobile-overlay__close-button cross-button" type="submit">
+                <span class="visually-hidden">Close navigation menu</span>
+            </button>
+        </form>
+        <div class="mobile-overlay__body">
+            <ul class="mobile-overlay__list">
+                <li class="mobile-overlay-item">
+                    <a href="index.html" class="mobile-overlay__link">Главная</a>
+                </li>
+                <li class="mobile-overlay-item">
+                    <a href="" class="mobile-overlay__link">О нас</a>
+                </li>
+                <li class="mobile-overlay-item">
+                    <a href="shop.html" class="mobile-overlay__link">Магаин</a>
+                </li>
+                <li class="mobile-overlay-item">
+                    <a href="" class="mobile-overlay__link">Профиль</a>
+                </li>
+            </ul>
+        </div>
+    </dialog>
+
+</body>
+</html>

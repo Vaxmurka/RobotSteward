@@ -1,0 +1,92 @@
+.header {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C2C2C2;
+  //border-bottom: 1px solid var(--color-gray);
+
+  &__inner {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+  }
+  &__logo {
+    width: fit-content;
+    height: fit-content;
+
+    @include tablet {
+      max-width: 120px;
+    }
+
+    @include mobile {
+      max-width: 160px;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+
+    //margin-left: auto;
+    font-size: 20px;
+
+    @include desktop {
+      font-size: 18px;
+    }
+    @include tablet {
+      font-size: 16px;
+    }
+
+    &-accent {
+      background-color: var(--color-red);
+      padding-inline: 16px;
+      color: var(--color-white);
+      border-radius: 10px;
+    }
+
+    &-list {
+      display: flex;
+      column-gap: 40px;
+
+      @include desktop {
+        column-gap: 20px;
+      }
+    }
+    &-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 48px;
+
+      @include hover {
+        &::after {
+          animation: downLine 0.2s ease both;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        translate: -50%;
+        width: 0;
+        height: 2px;
+        background-color: currentColor;
+        transition: inherit;
+      }
+    }
+  }
+}
+
+@keyframes downLine {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

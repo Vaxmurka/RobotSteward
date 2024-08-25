@@ -1,0 +1,183 @@
+.shop {
+  display: grid;
+  grid-template-columns: repeat(3, 320px);
+  //grid-auto-rows: 430px;
+  height: auto;
+  justify-content: center;
+  column-gap: 30px;
+  row-gap: 50px;
+
+  align-items: center;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 350px);
+  }
+  @include mobile {
+    grid-template-columns: repeat(1, 400px);
+    //grid-auto-rows: 550px;
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    //background-color: var(--color-white);
+    overflow: hidden;
+    justify-content: center;
+
+    border-radius: 20px;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+
+    &_image {
+      //background-image: url("/images/shop/Cookie.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      //border-top-left-radius: 20px;
+      //border-top-right-radius: 20px;
+      border-radius: 20px;
+      width: 100%;
+      height: fit-content;
+    }
+
+    &_content {
+      display: flex;
+      //row-gap: 15px;
+      padding: 2px 15px;
+      align-content: space-between;
+      flex-direction: column;
+
+      &-inner {
+        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 150px;
+      }
+    }
+
+    &_name {
+      text-align: start;
+      width: fit-content;
+      font-size: 20px;
+    }
+    &_description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+    }
+    &_btn {
+      //width: 150px;
+      height: 50px;
+      border: none;
+      background-color: var(--color-red);
+      color: var(--color-white);
+
+      text-transform: uppercase;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+
+      border-radius: 15px;
+      box-shadow: 0 5px 30px 0 rgb(0 0 0 / 10%);
+    }
+  }
+
+  &__price {
+    display: inline-flex;
+    flex-direction: row;
+    column-gap: 20px;
+    align-items: flex-end;
+    &_new {
+      font-size: 30px;
+      font-weight: bold;
+      //color: #006933;
+      //color: var(--color-blue);
+      color: var(--color-gray)
+    }
+    &_old {
+      font-size: 25px;
+      text-decoration: line-through;
+      color: #b2b2b2;
+    }
+  }
+
+  &__dialog {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &_image {
+      width: 50%;
+      display: flex;
+      background-size: contain;
+    }
+    &_image img {
+      border-radius: 20px;
+    }
+    &_content {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      justify-content: space-between;
+
+      //@include mobile {
+      //  flex-direction: row;
+      //  width: 100%;
+      //}
+      &-text h1 {
+        //text-align: center;
+        font-size: 35px;
+        font-weight: bold;
+        color: var(--color-gray);
+        margin: 0 0 0 40px;
+        padding-top: 35px;
+
+        @include mobile {
+          margin: 0;
+          text-align: center;
+        }
+      }
+      &-text h2 {
+        font-size: 13px;
+        margin: 0 0 0 40px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: var(--color-green);
+        letter-spacing: 0.2em;
+
+        @include mobile {
+          margin: 0;
+          text-align: center;
+        }
+      }
+      &-priceBtn button {
+        height: 70px;
+        width: 100%;
+        border: transparent;
+        border-radius: 20px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #ffffff;
+        background-color: var(--color-red);
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+}
+
+span {
+  display: inline-block;
+  height: 50px;
+  font-family: 'Suranna', serif;
+  font-size: 34px;
+}

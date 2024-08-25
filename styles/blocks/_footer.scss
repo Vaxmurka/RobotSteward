@@ -1,0 +1,29 @@
+.footer {
+  background-color: var(--bgColor-footer);
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 2;
+
+  &__inner {
+    color: var(--color-white);
+    font-size: 23px;
+
+    @include tablet() {
+      font-size: 20px;
+    }
+    @include mobile() {
+      font-size: 18px;
+    }
+
+    &_name {
+      background-color: var(--color-red);
+      padding: 5px 16px;
+      color: var(--color-white);
+      border-radius: 10px;
+    }
+  }
+}
