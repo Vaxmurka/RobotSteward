@@ -641,6 +641,16 @@ span {
   font-style: normal;
   font-size: 25px;
 }
+@media (max-width: 1023px) {
+  .infoProfile__profile_label span {
+    width: 100%;
+  }
+}
+@media (max-width: 767px) {
+  .infoProfile__profile_label span {
+    width: auto;
+  }
+}
 .infoProfile__profile_id {
   font-size: 16px;
   color: #c2c2c2;
