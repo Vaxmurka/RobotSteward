@@ -25,6 +25,9 @@
 #define HeadCenter 102
 #define HeadUp     179
 #define HeadDown   70
+// #define HeadCenter 90
+// #define HeadUp     169
+// #define HeadDown   60
 
 #define headInputUp   20
 #define headInputDown -10

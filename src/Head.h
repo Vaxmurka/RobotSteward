@@ -22,7 +22,7 @@ public:
     void rotateY(int y);
     void stop();
 
-    bool getState();
+    bool getState(char axis);
 private:
     void tickX();
     void tickY();

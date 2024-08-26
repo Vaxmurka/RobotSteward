@@ -96,7 +96,7 @@ void Head::tickY() {
   }
 
   if (millis() - tmrY > 10) {
-    tmr = millis();
+    tmrY = millis();
     if (dirY) counterY++;
     else counterY--;
 
@@ -165,7 +165,7 @@ void Head::rotateY(int y) {
     else dirY = false;
     counterY = 0;
 
-    Serial.println("ABS inputAngle: " + String(y) + " lastAngle " + String(currentY) + " outputAngle: " + String(targetY) + " dir " + String(dirY));
+    // Serial.println("ABS inputAngle: " + String(y) + " lastAngle " + String(currentY) + " outputAngle: " + String(targetY) + " dir " + String(dirY));
     // current = target;
 
     tmrY = millis();

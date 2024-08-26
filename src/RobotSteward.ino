@@ -12,9 +12,11 @@ Multiservo multiservo[MULTI_SERVO_COUNT];
 #include "Adafruit_VL53L0X.h"
 #define LOX1_ADDRESS 0x30
 #define LOX2_ADDRESS 0x31
+#define LOXHead_ADDRESS 0x32
 
 #define SHT_LOX1 7
 #define SHT_LOX2 6
+#define SHT_LOXHead 8
 
 Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
 Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
@@ -36,7 +38,6 @@ Head head(&multiservo[7]);
 SerialIO IO;
 
 struct Message currentMessage;
-struct Message message;
 
 bool getReady = false;
 
@@ -63,6 +64,7 @@ void setID() {
   digitalWrite(SHT_LOX1, HIGH);
   digitalWrite(SHT_LOX2, LOW);
   digitalWrite(SHT_LOXHead, LOW);
+  delay(10);
 
   // initing LOX1
   if(!lox1.begin(LOX1_ADDRESS)) {
@@ -86,8 +88,12 @@ void setID() {
   digitalWrite(SHT_LOXHead, HIGH);
   delay(10);
 
-  if(!loxHead.begin(LOXHead_ADDRESS)) {
-    Serial.println(F("Failed to boot second VL53L0X"));
+  // if(!loxHead.begin(LOXHead_ADDRESS)) {
+  //   Serial.println(F("Failed to boot second VL53L0X"));
+  //   while(1);
+  // }
+  if (!loxHead.begin()) {
+    Serial.println(F("Failed to boot HEAD VL53L0X"));
     while(1);
   }
 }
@@ -101,32 +107,19 @@ void setup() {
         // Подключаем сервомотор
         multiservo[count].attach(count);
     }
+    Serial.println("Adafruit VL53L0X test");
     setID();
+    Serial.println(String(getDistanse(0)) + "  " + String(getDistanse(1)) + "  " + String(getDistanse(2)));
     head.begin();
     head.home();
-
-    multiservo[3].write(165);
 
     getReady = false;
 }
 
-// void handleMessage() {
-//   if (message.code == "H") {
-//     head.rotate(message.args[0], message.args[1]);
-//   }
-//   if (message.code == "S") {
-//     head.stop();
-//   }
-
-//   if (message.code == "Hd") {
-//     Serial.println(getDistanse(message.args[0]));
-//   }
-// }
-
 void loop() {
     head.tick();
 
-    if (head.getState('x') && get.getState('y')) {
+    if (head.getState('x') && head.getState('y')) {
       if (!getReady) {
         Serial.println("READY");
         getReady = true;
@@ -137,10 +130,6 @@ void loop() {
     if (newMessage.code != "") {
         handleMessage(newMessage);
     }
-//     message = IO.readMessage();
-//     if (message.code != "") {
-//         handleMessage();
-//     }
 }
 
 void handleMessage(struct Message message) {
@@ -156,6 +145,9 @@ void handleMessage(struct Message message) {
         }
         if (message.code == "S") {
           head.stop();
+        }
+        if (message.code == "Hd") {
+          Serial.println(getDistanse(message.args[0]));
         }
     }
     else {
@@ -193,8 +185,8 @@ int getDistanse(int index) {
     if(measure2.RangeStatus != 4) {     // if not out of range
       return measure2.RangeMilliMeter;
     } else return 0;
-  } else {
-    if(measureHead.RangeStatus != 4) {     // if not out of range
+  } else if (index == 0) {
+    if(measureHead.RangeStatus != 4) {  // if not out of range
       return measureHead.RangeMilliMeter;
     } else return 0;
   }
