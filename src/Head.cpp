@@ -101,7 +101,7 @@ void Head::tickY() {
     else counterY--;
 
     servo->write(currentY+counterY);
-    // Serial.println(String(currentY+counterY));
+    Serial.println(String(currentY+counterY));
   }
   stateY = false;
 }
