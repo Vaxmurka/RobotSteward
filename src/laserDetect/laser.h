@@ -2,8 +2,8 @@
 #include <Servo.h>
 Servo servo;
 
-#include "Adafruit_VL53L0X.h"
-Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+// #include "Adafruit_VL53L0X.h"
+// Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 
 
 /* side
@@ -19,10 +19,10 @@ class laser {
     void begin() {
       servo.attach(pin);
       servo.write(60);
-      if (!lox.begin()) {
-        Serial.println(F("Failed to boot VL53L0X"));
-        while(1);
-      }
+      // if (!lox.begin()) {
+      //   Serial.println(F("Failed to boot VL53L0X"));
+      //   while(1);
+      // }
     }
     int getSide() {
       if (side != 0) {
@@ -32,7 +32,9 @@ class laser {
       } else return 0;
     }
     void scan() {
-      if (millis() % 2 == 0) {
+      if (millis() - tmr >= 2) {
+        tmr = millis();
+        
         if (dir && currentAngle == 120) {
           dir = false;
           index = 120;
@@ -77,17 +79,17 @@ class laser {
           ++index;
           // Считывание дистанции
         }
-        lox.rangingTest(&measure, false);
-        if (measure.RangeStatus != 4) {
-          if (isPeriod == 1) array1[index] = measure.RangeMilliMeter;
-          if (isPeriod == 2) array2[index] = measure.RangeMilliMeter;
-          if (isPeriod == 3) array3[index] = measure.RangeMilliMeter;
-        }
+        // lox.rangingTest(&measure, false);
+        // if (measure.RangeStatus != 4) {
+        //   if (isPeriod == 1) array1[index] = measure.RangeMilliMeter;
+        //   if (isPeriod == 2) array2[index] = measure.RangeMilliMeter;
+        //   if (isPeriod == 3) array3[index] = measure.RangeMilliMeter;
+        // }
         servo.write(currentAngle);
       }
     }
   private:
-    VL53L0X_RangingMeasurementData_t measure;
+    // VL53L0X_RangingMeasurementData_t measure;
     int pin;
 
     bool dir = true;
