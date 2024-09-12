@@ -92,7 +92,14 @@
       font-weight: bold;
       //color: #006933;
       //color: var(--color-blue);
-      color: var(--color-gray)
+      color: var(--color-gray);
+
+      span {
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Inter", sans-serif;
+        color: var(--color-gray)
+      }
     }
     &_old {
       font-size: 25px;
