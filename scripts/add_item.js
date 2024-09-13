@@ -13,7 +13,7 @@ fetch('./scripts/data.json')
             div.setAttribute('id', `${item.id}`);
             if (localStorage.getItem(`product${item.id}`) !== null) textButton = 'В корзине';
             div.innerHTML = `
-                    <div class="shop__block_image" onclick="window.dialog.showModal();">
+                    <div class="shop__block_image" onclick="openDialog('${item.name}', '${item.price}', '${item.image}')">
                         <img src="${item.image}" alt="imageProduct" class="shop__block_image">
                     </div>
                     <div class="shop__block_content">
@@ -85,4 +85,31 @@ function addToCart(data) {
             }
         });
     }
+}
+
+function openDialog(name, price, image) {
+    document.querySelector('#dialog').innerHTML = '';
+    console.log(name, price, image);
+    let dialogHTML = `
+         <div class="shop__dialog">
+            <div class="shop__dialog_image">
+                <img src="${image}" alt="cookie">
+            </div>
+            <div class="shop__dialog_content">
+                <div class="shop__dialog_content-text">
+                    <h1>${name}</h1>
+                    <h2>вай конфетка</h2>
+                </div>
+                <div class="shop__dialog_content-priceBtn">
+                    <div class="shop__price">
+                        <h3 class="shop__price_new">${price} ₽</h3>
+                    </div>
+                    <button type="button">Купить</button>
+                </div>
+            </div>
+        </div>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    `;
+    document.querySelector('#dialog').innerHTML += dialogHTML;
+    window.dialog.showModal();
 }

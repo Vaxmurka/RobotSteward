@@ -30,14 +30,14 @@
     },
     {
       "id": 5,
-      "name": "Чай черный (пакетированный)",
+      "name": "Чай черный",
       "price": "5",
       "image": "/images/shop/blackTea.png",
       "quantity": 100
     },
     {
       "id": 6,
-      "name": "Чай зеленый (пакетированный)",
+      "name": "Чай зеленый",
       "price": "6",
       "image": "/images/shop/greenTea.png",
       "quantity": 100
