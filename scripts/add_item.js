@@ -1,5 +1,5 @@
 // Загрузка данных из файла и добавление товаров на страницу
-fetch('http://localhost:8002/products/list')
+fetch('http://server:8002/products/list')
     .then(response => response.json())
     .then((data) => {
         // Создание массива для отображения товаров
@@ -31,7 +31,7 @@ fetch('http://localhost:8002/products/list')
 
 const basket = [];
 
-fetch("http://localhost:8002/baskets/robot")
+fetch("http://server:8002/baskets/robot")
     .then(response => response.json())
     .then(data => {
         for (const pos of data.positions) {
@@ -42,7 +42,7 @@ fetch("http://localhost:8002/baskets/robot")
 
 
 function addToBasket(id) {
-    fetch("http://localhost:8002/baskets/robot/update",{
+    fetch("http://server:8002/baskets/robot/update",{
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ function addToBasket(id) {
 
 function openDialog(id) {
     document.querySelector('#dialog').innerHTML = '';
-    fetch(`http://localhost:8002/products/${id}`)
+    fetch(`http://server:8002/products/${id}`)
         .then(response => response.json())
         .then(data => {
             const elemTitle = document.querySelector('.shop__dialog_content-text');

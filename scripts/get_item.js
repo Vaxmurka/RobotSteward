@@ -1,6 +1,6 @@
 positions = []
 
-fetch("http://127.0.0.1:8002/baskets/robot")
+fetch("http://server:8002/baskets/robot")
     .then(response => response.json())
     .then(data => {
         positions = data.positions;
@@ -24,7 +24,7 @@ fetch("http://127.0.0.1:8002/baskets/robot")
                             </div>
                         </div>
                      </div>`;
-            fetch(`http://127.0.0.1:8002/products/${pos.product_id}`)
+            fetch(`http://server:8002/products/${pos.product_id}`)
                 .then(response => response.json())
                 .then(product => {
                     const pos = document.querySelector(`#pos_${product.id}`);
@@ -37,7 +37,7 @@ fetch("http://127.0.0.1:8002/baskets/robot")
                     <div class="cart__total_line"></div>
                     <div class="cart__total_inner">
                         <p class="cart__total_inner-price">Итого: <span>${data.total_price}₽</span></p>
-                        <button class="cart__total_inner-btn">Оформить заказ</button>
+                        <button class="cart__total_inner-btn" onclick="checkout()">Оформить заказ</button>
                     </div>
                  </div>
                  <button class="cart__btnClear">Очистить корзину</button>`;
@@ -64,7 +64,7 @@ function updateAmount(id, amount, updateElement = true) {
     }
 
     const newAmount = amount === 0 ? 0 : pos.amount + amount;
-    fetch ("http://127.0.0.1:8002/baskets/robot/update", {
+    fetch ("http://server:8002/baskets/robot/update", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -105,38 +105,14 @@ for (const itemCheck of btnCheck) {
     });
 }
 
-
-function addToCart(btn, count, index, type) {
-    // console.log(count);
-    const productCounter = btn.closest('.cart__block_quantity');
-    const quantity = productCounter.querySelector('.cart__block_quantity-text');
-
-    if (type === 'add') count++;
-    else count--;
-
-    arrayOfProducts[index].count = count;
-    let products = JSON.parse(localStorage.getItem('products'));
-    products[index].count = count;
-
-    // Удаление объекта если значение '0' (надо будет поправить, херня потому что)
-    if (count === 0) {
-        console.log(products);
-        removeObjectWithId(products, index+1);
-    }
-
-    console.log(products[index]);
-    localStorage.setItem('products', JSON.stringify(products));
-    location.reload();
-
-    quantity.textContent = quantity.textContent.replace(quantity.textContent, count.toString());
-}
-
-function removeObjectWithId(arr, id) {
-    const objWithIdIndex = arr.findIndex((obj) => obj.id === id);
-
-    if (objWithIdIndex > -1) {
-        arr.splice(objWithIdIndex, 1);
-    }
-
-    return arr;
+function checkout() {
+    fetch("http://server:8002/baskets/robot/checkout", {method: "POST"})
+        .then(response => response.json())
+        .then(data =>
+            fetch(`http://server:8002/orders/${data.id}/pay`, {method: "POST"})
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "http://robot:8000/complete"
+                })
+        );
 }
