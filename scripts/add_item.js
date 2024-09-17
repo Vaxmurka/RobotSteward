@@ -1,5 +1,5 @@
 // Загрузка данных из файла и добавление товаров на страницу
-fetch('http://localhost:8000/products/list')
+fetch('http://localhost:8002/products/list')
     .then(response => response.json())
     .then((data) => {
         // Создание массива для отображения товаров
@@ -26,12 +26,12 @@ fetch('http://localhost:8000/products/list')
             block.appendChild(div);
         }
 
-
+        openProductFromUrl();
     });
 
 const basket = [];
 
-fetch("http://localhost:8000/baskets/robot")
+fetch("http://localhost:8002/baskets/robot")
     .then(response => response.json())
     .then(data => {
         for (const pos of data.positions) {
@@ -42,7 +42,7 @@ fetch("http://localhost:8000/baskets/robot")
 
 
 function addToBasket(id) {
-    fetch("http://localhost:8000/baskets/robot/update",{
+    fetch("http://localhost:8002/baskets/robot/update",{
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ function addToBasket(id) {
 
 function openDialog(id) {
     document.querySelector('#dialog').innerHTML = '';
-    fetch(`http://localhost:8000/products/${id}`)
+    fetch(`http://localhost:8002/products/${id}`)
         .then(response => response.json())
         .then(data => {
             const elemTitle = document.querySelector('.shop__dialog_content-text');
@@ -87,7 +87,7 @@ function openDialog(id) {
                     <div class="shop__price">
                         <h3 class="shop__price_new">₽</h3>
                     </div>
-                    <button type="button">Купить</button>
+                    <button type="button" onclick="addToBasket('${id}'); window.dialog.close();">Купить</button>
                 </div>
             </div>
         </div>
@@ -104,5 +104,23 @@ function updateBuyButtons() {
 }
 
 function setBuyButton(id) {
-    document.querySelector(`#product_${id} .shop__block_btn`).innerText = "В корзине";
+    const btn = document.querySelector(`#product_${id} .shop__block_btn`);
+    btn.innerText = "В корзине";
+    btn.onclick = () => goToBasket();
+}
+
+function goToBasket() {
+    console.log("Go to basket");
+    window.location.href = "cart.html";
+}
+
+function openProductFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get("product_id");
+
+    if (productId == null) {
+        return;
+    }
+
+    openDialog(productId);
 }
