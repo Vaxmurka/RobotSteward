@@ -1,8 +1,5 @@
 positions = []
 
-// http://server:8002/baskets/robot
-// ./scripts/data.json
-
 fetch("http://server:8002/baskets/robot")
     .then(response => response.json())
     .then(data => {
