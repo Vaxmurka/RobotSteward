@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -11,7 +10,7 @@
 <img src="images/index/train.jpg" alt="background"
      width="5610" height="3739" class="background_image">
 <div class="wrapper">
-    <form action="#">
+    <form>
         <h2>Вход</h2>
         <div class="information-field">
             <p>
@@ -20,11 +19,23 @@
             </p>
         </div>
         <div class="input-field">
-            <input type="text" required>
+            <input id="ticketNumberInput" type="text" required>
             <label>Введите номер своего билета</label>
         </div>
-        <button type="submit">Войти</button>
+        <button type="button" onclick="login()">Войти</button>
     </form>
 </div>
+<script>
+    function login() {
+        const input = document.querySelector("#ticketNumberInput");
+        const ticketNumber = input.value;
+
+        document.cookie = `Ticket=${ticketNumber}; path=/`
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let next = urlParams.has("next") ? urlParams.get("next") : "/static/index.html";
+        window.location.href = next;
+    }
+</script>
 </body>
 </html>
