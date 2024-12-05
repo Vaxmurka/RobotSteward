@@ -31,7 +31,7 @@ fetch('http://server:8002/products/list')
 
 const basket = [];
 
-fetch("http://server:8002/baskets/robot")
+fetch("http://server:8002/baskets/")
     .then(response => response.json())
     .then(data => {
         for (const pos of data.positions) {
@@ -42,7 +42,7 @@ fetch("http://server:8002/baskets/robot")
 
 
 function addToBasket(id) {
-    fetch("http://server:8002/baskets/robot/update",{
+    fetch("http://server:8002/baskets/update",{
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
