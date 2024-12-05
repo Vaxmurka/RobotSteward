@@ -16,6 +16,9 @@
     grid-template-columns: repeat(1, 400px);
     //grid-auto-rows: 550px;
   }
+  @include mini {
+    grid-template-columns: 90vw;
+  }
 
   &__card {
     display: flex;

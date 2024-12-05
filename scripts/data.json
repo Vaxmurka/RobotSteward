@@ -1,46 +1,52 @@
 {
-  "data": [
+  "positions": [
     {
       "id": 1,
       "name": "Шоколадное мороженое",
       "price": "160",
-      "image": "/images/shop/iceCreamChoc.jpg",
-      "quantity": 50
+      "image": "./images/shop/iceCreamChoc.jpg",
+      "quantity": 50,
+      "positions": 20
     },
     {
       "id": 2,
       "name": "Печенье овсяное",
       "price": "10",
       "image": "/images/shop/Cookie.jpg",
-      "quantity": 50
+      "quantity": 50,
+      "positions": 20
     },
     {
       "id": 3,
       "name": "Вода",
       "price": "50",
       "image": "/images/shop/water.png",
-      "quantity": 100
+      "quantity": 100,
+      "positions": 20
     },
     {
       "id": 4,
       "name": "Чипсы",
       "price": "200",
       "image": "/images/shop/chips.jpg",
-      "quantity": 50
+      "quantity": 50,
+      "positions": 20
     },
     {
       "id": 5,
       "name": "Чай черный",
       "price": "5",
       "image": "/images/shop/blackTea.png",
-      "quantity": 100
+      "quantity": 100,
+      "positions": 20
     },
     {
       "id": 6,
       "name": "Чай зеленый",
       "price": "6",
       "image": "/images/shop/greenTea.png",
-      "quantity": 100
+      "quantity": 100,
+      "positions": 20
     }
   ]
 }
