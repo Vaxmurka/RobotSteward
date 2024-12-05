@@ -238,7 +238,7 @@ a {
   font-family: "Open Sans", sans-serif;
 }
 
-body {
+.login {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,8 +246,7 @@ body {
   width: 100%;
   padding: 0 10px;
 }
-
-body::before {
+.login::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -255,15 +254,13 @@ body::before {
   background-position: center;
   background-size: cover;
 }
-
-.background_image {
+.login__background_image {
   max-width: 100%;
   height: 100%;
   position: fixed;
   object-fit: cover;
 }
-
-.wrapper {
+.login__content {
   width: 400px;
   border-radius: 8px;
   padding: 30px;
@@ -272,25 +269,48 @@ body::before {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
-
-form {
+.login__content a {
+  color: #efefef;
+  text-decoration: none;
+}
+.login__content a:hover {
+  text-decoration: underline;
+}
+.login__content form {
   display: flex;
   flex-direction: column;
 }
-
-h2 {
+.login__content_header {
   font-size: 2rem;
   margin-bottom: 20px;
   color: #fff;
 }
-
-.input-field {
+.login__content_information-field {
+  margin-bottom: 50px;
+}
+.login__content_information-field p {
+  color: #efefef;
+}
+.login__content_input-field {
   position: relative;
   border-bottom: 2px solid #ccc;
   margin: 15px 0;
 }
-
-.input-field label {
+.login__content_input-field input {
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #fff;
+}
+.login__content_input-field input:focus ~ label, .login__content_input-field input:valid ~ label {
+  font-size: 0.8rem;
+  top: 10px;
+  transform: translateY(-120%);
+}
+.login__content_input-field label {
   position: absolute;
   top: 50%;
   left: 0;
@@ -300,41 +320,7 @@ h2 {
   pointer-events: none;
   transition: 0.15s ease;
 }
-
-.input-field input {
-  width: 100%;
-  height: 40px;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #fff;
-}
-
-.input-field input:focus ~ label,
-.input-field input:valid ~ label {
-  font-size: 0.8rem;
-  top: 10px;
-  transform: translateY(-120%);
-}
-
-.information-field {
-  margin-bottom: 50px;
-}
-.information-field p {
-  color: #efefef;
-}
-
-.wrapper a {
-  color: #efefef;
-  text-decoration: none;
-}
-
-.wrapper a:hover {
-  text-decoration: underline;
-}
-
-button {
+.login__btn {
   background: #fff;
   color: #000;
   font-weight: 600;
@@ -346,8 +332,7 @@ button {
   border: 2px solid transparent;
   transition: 0.3s ease;
 }
-
-button:hover {
+.login__btn:hover {
   color: #fff;
   border-color: #fff;
   background: rgba(255, 255, 255, 0.15);
