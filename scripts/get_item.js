@@ -1,6 +1,6 @@
 positions = []
 
-fetch("http://server:8002/baskets/robot")
+fetch("http://server:8002/baskets")
     .then(response => response.json())
     .then(data => {
         positions = data.positions;
@@ -64,7 +64,7 @@ function updateAmount(id, amount, updateElement = true) {
     }
 
     const newAmount = amount === 0 ? 0 : pos.amount + amount;
-    fetch ("http://server:8002/baskets/robot/update", {
+    fetch ("http://server:8002/baskets/update", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ for (const itemCheck of btnCheck) {
 }
 
 function checkout() {
-    fetch("http://server:8002/baskets/robot/checkout", {method: "POST"})
+    fetch("http://server:8002/baskets/checkout", {method: "POST"})
         .then(response => response.json())
         .then(data =>
             fetch(`http://server:8002/orders/${data.id}/pay`, {method: "POST"})
