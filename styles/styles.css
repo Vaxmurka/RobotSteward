@@ -767,6 +767,17 @@ span {
     width: 450px;
   }
 }
+@media (max-width: 510px) {
+  .infoProfile {
+    width: 90vw;
+    margin-inline: auto;
+  }
+}
+@media (max-width: 1099px) {
+  .infoProfile {
+    width: 90vw;
+  }
+}
 .infoProfile__profile {
   display: grid;
   grid-template-columns: 1fr;
@@ -799,13 +810,17 @@ span {
   .infoProfile__profile_group2 {
     text-align: start;
     grid-template-columns: 1fr;
-    grid-auto-rows: 50px;
   }
 }
 .infoProfile__profile_label {
   margin-left: 50px;
   color: var(--color-gray);
   font-size: 20px;
+}
+@media (max-width: 510px) {
+  .infoProfile__profile_label {
+    margin-left: 5vw;
+  }
 }
 .infoProfile__profile_label span {
   color: var(--color-blue);
@@ -846,10 +861,31 @@ span {
   border: 0;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.1);
 }
+@media (max-width: 767px) {
+  .infoProfile__info {
+    gap: 50px;
+  }
+}
 .infoProfile__info_info1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+.infoProfile__info_info1-inner1 {
+  display: contents;
+}
+@media (max-width: 767px) {
+  .infoProfile__info_info1-inner1 {
+    display: none;
+  }
+}
+.infoProfile__info_info1-inner2 {
+  display: none;
+}
+@media (max-width: 767px) {
+  .infoProfile__info_info1-inner2 {
+    display: contents;
+  }
 }
 .infoProfile__info_info1-city {
   font-size: 28px;
@@ -865,24 +901,11 @@ span {
   font-weight: 600;
   font-style: normal;
 }
-.infoProfile__info_info1-time1 {
+.infoProfile__info_info1-time {
   font-size: 25px;
   color: var(--color-gray);
-  text-align: start;
 }
-.infoProfile__info_info1-time1 span {
-  color: #c3c3c3;
-  font-size: 20px;
-  font-family: "Inter", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-.infoProfile__info_info1-time2 {
-  font-size: 25px;
-  color: var(--color-gray);
-  text-align: end;
-}
-.infoProfile__info_info1-time2 span {
+.infoProfile__info_info1-time span {
   color: #c3c3c3;
   font-size: 20px;
   font-family: "Inter", sans-serif;
@@ -895,6 +918,13 @@ span {
   gap: 20px;
   justify-items: center;
 }
+@media (max-width: 767px) {
+  .infoProfile__info_info2 {
+    grid-template-columns: 1fr 1fr;
+    width: 90vw;
+    margin-inline: -20px;
+  }
+}
 .infoProfile__info_info2-elem {
   display: flex;
   flex-direction: column;
@@ -902,6 +932,21 @@ span {
   justify-content: center;
   justify-items: center;
   row-gap: 5px;
+}
+
+.t1 {
+  text-align: start;
+  margin-top: 20px;
+}
+@media (max-width: 767px) {
+  .t1 {
+    text-align: end;
+  }
+}
+
+.t2 {
+  text-align: end;
+  margin-top: 20px;
 }
 
 :root {
