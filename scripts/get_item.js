@@ -1,6 +1,6 @@
 positions = []
 
-fetch("http://server:8002/baskets")
+fetch("http://192.168.137.1:8002/baskets")
     .then(response => response.json())
     .then(data => {
         positions = data.positions;
@@ -24,7 +24,7 @@ fetch("http://server:8002/baskets")
                             </div>
                         </div>
                      </div>`;
-            fetch(`http://server:8002/products/${pos.product_id}`)
+            fetch(`http://192.168.137.1:8002/products/${pos.product_id}`)
                 .then(response => response.json())
                 .then(product => {
                     const pos = document.querySelector(`#pos_${product.id}`);
@@ -64,7 +64,7 @@ function updateAmount(id, amount, updateElement = true) {
     }
 
     const newAmount = amount === 0 ? 0 : pos.amount + amount;
-    fetch ("http://server:8002/baskets/update", {
+    fetch ("http://192.168.137.1:8002/baskets/update", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -106,10 +106,10 @@ for (const itemCheck of btnCheck) {
 }
 
 function checkout() {
-    fetch("http://server:8002/baskets/checkout", {method: "POST"})
+    fetch("http://192.168.137.1:8002/baskets/checkout", {method: "POST"})
         .then(response => response.json())
         .then(data =>
-            fetch(`http://server:8002/orders/${data.id}/pay`, {method: "POST"})
+            fetch(`http://192.168.137.1:8002/orders/${data.id}/pay`, {method: "POST"})
                 .then(response => response.json())
                 .then(data => {
                     window.location.href = "http://robot:8000/complete"
