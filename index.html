@@ -8,6 +8,33 @@
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
     <title>Главная</title>
 </head>
+<script>
+    function goLink(linkHead) {
+        switch (linkHead) {
+            case 'food':
+                // Надо поменять на еду из вагона
+                window.open("https://eda.yandex.ru/");
+                break
+            case 'souvenirs':
+                window.open("https://shopmuseumrzd.ru/");
+                break
+            case 'taxi':
+                window.open("https://taxi.yandex.ru/");
+                break
+            case 'hotels':
+                window.open("https://ostrovok.ru/");
+                break
+            case 'excursions':
+                window.open("https://extraguide.ru/russia/");
+                break
+            case 'services':
+                // Надо заменить на что-нибудь из робота
+                window.open("https://www.rzd.ru/ru/9289");
+                break
+        }
+
+    }
+</script>
 <body>
     <header class="header">
         <div class="header__inner container">
@@ -49,7 +76,7 @@
     </header>
 
     <section class="index">
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('food')">
             <div class="index__card_image">
                 <img src="images/index/shop.jpg" alt="shop">
             </div>
@@ -59,7 +86,7 @@
                 </p>
             </div>
         </div>
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('souvenirs')">
             <div class="index__card_image">
                 <img src="images/index/suvenir.png" alt="shop">
             </div>
@@ -69,7 +96,7 @@
                 </p>
             </div>
         </div>
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('taxi')">
             <div class="index__card_image">
                 <img src="images/index/taksi.jpg" alt="shop">
             </div>
@@ -79,7 +106,7 @@
                 </p>
             </div>
         </div>
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('hotels')">
             <div class="index__card_image">
                 <img src="images/index/hotel.jpg" alt="shop">
             </div>
@@ -89,17 +116,17 @@
                 </p>
             </div>
         </div>
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('excursions')">
             <div class="index__card_image">
                 <img src="images/index/excursion.jpg" alt="shop">
             </div>
             <div class="index__content">
                 <p class="index__content_text">
-                    Плонирование экскурсии
+                    Планирование экскурсий
                 </p>
             </div>
         </div>
-        <div class="index__card">
+        <div class="index__card" onclick="goLink('services')">
             <div class="index__card_image">
                 <img src="images/index/train.jpg" alt="shop">
             </div>
@@ -133,7 +160,7 @@
                     <a href="" class="mobile-overlay__link">О нас</a>
                 </li>
                 <li class="mobile-overlay-item">
-                    <a href="shop.html" class="mobile-overlay__link">Магаин</a>
+                    <a href="shop.html" class="mobile-overlay__link">Магазин</a>
                 </li>
                 <li class="mobile-overlay-item">
                     <a href="infoProfile.html" class="mobile-overlay__link">Профиль</a>
