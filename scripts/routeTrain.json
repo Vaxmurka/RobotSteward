@@ -1,0 +1,122 @@
+{
+  "trainName": "№ 123",
+  "stations": [
+    {
+      "city": "Москва",
+      "name": "Рижская",
+      "time": "30 мин",
+      "arrivalTime": "12:00",
+      "departureTime": "12:30",
+      "delay": "0 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Тверь",
+      "name": "Тверь Центральная",
+      "time": "25 мин",
+      "arrivalTime": "14:00",
+      "departureTime": "14:25",
+      "delay": "5 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Санкт-Петербург",
+      "name": "Московский вокзал",
+      "time": "40 мин",
+      "arrivalTime": "18:00",
+      "departureTime": "18:40",
+      "delay": "10 мин",
+      "isCurrent": true
+    },
+    {
+      "city": "Казань",
+      "name": "Казань-Пассажирская",
+      "time": "35 мин",
+      "arrivalTime": "09:00",
+      "departureTime": "09:35",
+      "delay": "0 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Екатеринбург",
+      "name": "Екатеринбург-Главный",
+      "time": "20 мин",
+      "arrivalTime": "15:00",
+      "departureTime": "15:20",
+      "delay": "2 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Владивосток",
+      "name": "Владивосток",
+      "time": "32 мин",
+      "arrivalTime": "22:00",
+      "departureTime": "22:32",
+      "delay": "8 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Новосибирск",
+      "name": "Новосибирск-Главный",
+      "time": "28 мин",
+      "arrivalTime": "11:00",
+      "departureTime": "11:28",
+      "delay": "3 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Нижний Новгород",
+      "name": "Нижний Новгород-Московский",
+      "time": "45 мин",
+      "arrivalTime": "07:00",
+      "departureTime": "07:45",
+      "delay": "12 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Ростов-на-Дону",
+      "name": "Ростов-Главный",
+      "time": "38 мин",
+      "arrivalTime": "19:00",
+      "departureTime": "19:38",
+      "delay": "7 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Самара",
+      "name": "Самара",
+      "time": "22 мин",
+      "arrivalTime": "13:00",
+      "departureTime": "13:22",
+      "delay": "1 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Омск",
+      "name": "Омск-Пассажирский",
+      "time": "33 мин",
+      "arrivalTime": "06:00",
+      "departureTime": "06:33",
+      "delay": "9 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Красноярск",
+      "name": "Красноярск-Пассажирский",
+      "time": "27 мин",
+      "arrivalTime": "16:00",
+      "departureTime": "16:27",
+      "delay": "4 мин",
+      "isCurrent": false
+    },
+    {
+      "city": "Воронеж",
+      "name": "Воронеж-Главный",
+      "time": "42 мин",
+      "arrivalTime": "08:00",
+      "departureTime": "08:42",
+      "delay": "11 мин",
+      "isCurrent": false
+    }
+  ]
+}
