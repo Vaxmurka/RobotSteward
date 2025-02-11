@@ -6,6 +6,7 @@
     <title>Панель управления</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <style>
         img {
@@ -36,6 +37,13 @@
         </div>
         <img id="stream-image">
     </div>
+    <div class="box" id="passport-box" style="display: none;">
+        <p class="subtitle is-4 has-text-centered">Проверка паспорта</p>
+
+        <input class="input mr-3" type="text" placeholder="3620 876543" style="max-width: 250px;"/>
+        <button class="button is-success" onclick="submitPassport()">Submit</button>
+        <button class="button is-danger ml-2" onclick="declinePassport()">Decline</button>
+    </div>
     <div class="box">
         <p class="subtitle is-4 has-text-centered">Навигация</p>
         
@@ -49,6 +57,41 @@
 
 <script src="/static/scripts/cp_streams.js"></script>
 <script src="/static/scripts/cp_chart.js"></script>
+
+<script>
+    window.addEventListener("channel_ready", function (event) {
+
+        event.detail.channel.addEventListener("code_passport_request", function (event) {
+            showPassportRequest();
+        });
+
+    });
+
+    function showPassportRequest() {
+        setActiveStream("documents_camera");
+
+        $("#passport-box").show();
+        $("#passport-box input").val("");
+
+        setTimeout(hidePassportRequest, 30000);
+    }
+
+    function submitPassport() {
+        const value = $("#passport-box input").val().replace(" ", "");
+        channel.send("passport_response", {"passport_number": value});
+        hidePassportRequest();
+    }
+
+    function declinePassport() {
+        channel.send("passport_response", {"passport_number": null});
+        hidePassportRequest();
+    }
+
+    function hidePassportRequest() {
+        $("#passport-box").hide();
+        $("#passport-box input").val("");
+    }
+</script>
 
 </body>
 </html>
