@@ -44,6 +44,12 @@
         <button class="button is-success" onclick="submitPassport()">Submit</button>
         <button class="button is-danger ml-2" onclick="declinePassport()">Decline</button>
     </div>
+    <div class="box" id="face-box" style="display: none;">
+        <p class="subtitle is-4 has-text-centered">Проверка биометрии</p>
+
+        <button class="button is-success" onclick="confirmFace()">Submit</button>
+        <button class="button is-danger ml-2" onclick="declineFace()">Decline</button>
+    </div>
     <div class="box">
         <p class="subtitle is-4 has-text-centered">Навигация</p>
         
@@ -65,7 +71,14 @@
             showPassportRequest();
         });
 
+        event.detail.channel.addEventListener("code_face_request", function (event) {
+            showFaceRequest();
+        });
+
     });
+
+    passportTimeoutId = NaN;
+    faceTimeoutId = NaN;
 
     function showPassportRequest() {
         setActiveStream("documents_camera");
@@ -73,7 +86,7 @@
         $("#passport-box").show();
         $("#passport-box input").val("");
 
-        setTimeout(hidePassportRequest, 30000);
+        passportTimeoutId = setTimeout(hidePassportRequest, 30000);
     }
 
     function submitPassport() {
@@ -90,6 +103,38 @@
     function hidePassportRequest() {
         $("#passport-box").hide();
         $("#passport-box input").val("");
+
+        if (!isNaN(passportTimeoutId)) {
+            clearTimeout(passportTimeoutId);
+            passportTimeoutId = NaN;
+        }
+    }
+
+    function showFaceRequest() {
+        setActiveStream("passport_history");
+
+        $("#face-box").show();
+
+        faceTimeoutId = setTimeout(hideFaceRequest, 30000);
+    }
+
+    function confirmFace() {
+        channel.send("face_response", {"result": true});
+        hideFaceRequest();
+    }
+
+    function declineFace() {
+        channel.send("face_response", {"result": false});
+        hideFaceRequest();
+    }
+
+    function hideFaceRequest() {
+        $("#face-box").hide();
+
+        if (!isNaN(faceTimeoutId)) {
+            clearTimeout(faceTimeoutId);
+            faceTimeoutId = NaN;
+        }
     }
 </script>
 
