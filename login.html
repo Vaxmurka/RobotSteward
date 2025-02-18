@@ -29,16 +29,30 @@
 </section>
 
 <script>
-    function login() {
-        const input = document.querySelector("#ticketNumberInput");
-        const ticketNumber = input.value;
+    function login(auto=false) {
+        const urlParams = new URLSearchParams(window.location.search);
+        let ticketNumber = null;
+        if (auto) {
+            if (urlParams.has("ticket")) {
+                ticketNumber = urlParams.get("ticket");
+            }
+            else {
+                return;
+            }
+        }
+        else {
+            const input = document.querySelector("#ticketNumberInput");
+            ticketNumber = input.value;
+        }
 
         document.cookie = `Ticket=${ticketNumber}; path=/`
 
-        const urlParams = new URLSearchParams(window.location.search);
         let next = urlParams.has("next") ? urlParams.get("next") : "/static/index.html";
         window.location.href = next;
     }
+
+    addEventListener("load", (event) => login(true));
+
 </script>
 </body>
 </html>
