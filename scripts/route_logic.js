@@ -1,7 +1,17 @@
 const routeData = {
     trainName: "Поезд №123",
     stations: [
-        { city: "Москва", name: "Рижская", time: "30 мин", arrivalTime: "12:00", departureTime: "12:30", delay: "0 мин", isCurrent: false },
+        {
+            name: "Москва (Ленинградский вокзал)",
+            city: "Москва",
+            arrival_time: null,
+            departure_time: "08:00",
+            delay: 0,
+            platform: "1",
+            stop_duration: null,
+            connections: ["метро 1 (Сокольническая линия)", "автобусы 40, 122"],
+            isCurrent: false
+        },
     ],
 };
 
@@ -26,8 +36,8 @@ function renderStations() {
                     <h2>${station.name}</h2>
                     <h3>Город: ${station.city}</h3>
                     <div class="elem_data">
-                        <p class="arrivalTime">Время прибытия: ${station.arrivalTime}</p>
-                        <p class="departureTime">Время отправления: ${station.departureTime}</p>
+                        ${station.arrival_time !== null ? `<p class="arrivalTime">Время прибытия: ${station.arrival_time}</p>` : ``} 
+                        ${station.departure_time !== null ? `<p class="departureTime">Время отправления: ${station.departure_time}</p>` : ``} 
                     </div>
                 </div>
                 <div class="route__row_line">
@@ -40,8 +50,8 @@ function renderStations() {
                     <h2>${next_station.name}</h2>
                     <h3>Город: ${next_station.city}</h3>
                     <div class="elem_data">
-                        <p class="arrivalTime">Время прибытия: ${next_station.arrivalTime}</p>
-                        <p class="departureTime">Время отправления: ${next_station.departureTime}</p>
+                        ${next_station.arrival_time !== null ? `<p class="arrivalTime">Время прибытия: ${next_station.arrival_time}</p>` : ``}
+                        ${next_station.departure_time !== null ? `<p class="departureTime">Время отправления: ${next_station.departure_time}</p>` : ``} 
                     </div>
                 </div>
             </div>
@@ -57,8 +67,8 @@ function renderStations() {
                     <h2>${station.name}</h2>
                     <h3>Город: ${station.city}</h3>
                     <div class="elem_data">
-                        <p class="arrivalTime">Время прибытия: ${station.arrivalTime}</p>
-                        <p class="departureTime">Время отправления: ${station.departureTime}</p>
+                        ${station.arrival_time !== null ? `<p class="arrivalTime">Время прибытия: ${station.arrival_time}</p>` : ``} 
+                        ${station.departure_time !== null ? `<p class="departureTime">Время отправления: ${station.departure_time}</p>` : ``}
                     </div>
                 </div>
                 <div class="route__row_line">
@@ -84,8 +94,8 @@ function renderStationsMobile() {
                     <h2>${stationM.name}</h2>
                     <h3>Город: ${stationM.city}</h3>
                     <div class="elem_data">
-                        <p class="arrivalTime">Время прибытия: ${stationM.arrivalTime}</p>
-                        <p class="departureTime">Время отправления: ${stationM.departureTime}</p>
+                        ${stationM.arrival_time !== null ? `<p class="arrivalTime">Время прибытия: ${stationM.arrival_time}</p>` : ``} 
+                        ${stationM.departure_time !== null ? `<p class="departureTime">Время отправления: ${stationM.departure_time}</p>` : ``}
                     </div>
                 </div>
                 <div class="mobileRoute__line">
@@ -102,6 +112,9 @@ function updateRouteInfo() {
     document.getElementById("train-name").textContent = routeData.trainName;
     document.getElementById("current-station").textContent = currentStation?.name || "-";
     document.getElementById("next-station").textContent = nextStation?.name || "-";
+
+    // const startTime = routeData.stations[0].departure_time;
+    // const endTime = routeData.stations[routeData.stations.length-1].arrival_time;
 }
 
 
