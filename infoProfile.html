@@ -51,8 +51,8 @@
 <section class="infoProfile">
     <div class="infoProfile__profile">
         <div class="infoProfile__profile_group1">
-            <p class="infoProfile__profile_label">Место:&nbsp; <span>4</span></p>
-            <p class="infoProfile__profile_id">id: <span>00001</span></p>
+            <p class="infoProfile__profile_label">Место:&nbsp; <span id="seat"></span></p>
+            <p class="infoProfile__profile_id">id: <span id="passenger_id"></span></p>
         </div>
 
         <div class="infoProfile__profile_line"></div>
@@ -62,8 +62,8 @@
 <!--            <p class="infoProfile__profile_label">Имя:&nbsp; <span>Иван</span></p>-->
 <!--            <p class="infoProfile__profile_label">Очество:&nbsp; <span>Иванович</span></p>-->
 <!--            <p class="infoProfile__profile_label">Паспорт:&nbsp; <span>0000 000000</span></p>-->
-            <p class="infoProfile__profile_label">ФИО:&nbsp;<span>Быстров Михаил Олегович</span></p>
-            <p class="infoProfile__profile_label">Паспорт:&nbsp; <span>3621 148886</span></p>
+            <p class="infoProfile__profile_label">Пассажир:&nbsp;<span id="name"></span></p>
+            <p class="infoProfile__profile_label">Паспорт:&nbsp; <span id="passport"></span></p>
         </div>
     </div>
     <div class="infoProfile__info">
@@ -135,6 +135,26 @@
         <script src="scripts/route_logic.js"></script>
     </section>
 </section>
+
+<script>
+    addEventListener("load", () => {
+        loadPassengerInfo();
+    });
+
+    function loadPassengerInfo() {
+        console.log("Loading passenger info...")
+        fetch("/passengers/me/", {
+            method: "GET",
+        }).then((response) => {
+            return response.json();
+        }).then((json => {
+            document.getElementById("name").innerText = json["name"];
+            document.getElementById("seat").innerText = json["seat"];
+            document.getElementById("passport").innerText = String(json["passport"]).substring(0, 4) + " " + String(json["passport"]).substring(4);
+            document.getElementById("passenger_id").innerText = json["id"];
+        }))
+    }
+</script>
 
 
 <footer class="footer">
