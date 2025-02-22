@@ -439,6 +439,7 @@ a {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  justify-content: center;
 }
 @media (max-width: 767px) {
   .shop__dialog {
@@ -1172,6 +1173,12 @@ dialog::backdrop {
   z-index: 2;
   backdrop-filter: blur(20px);
 }
+dialog.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
 dialog .x {
   filter: grayscale(1);
   border: none;
@@ -1179,7 +1186,6 @@ dialog .x {
   position: absolute;
   top: 15px;
   right: 10px;
-  transition: ease filter, transform 0.3s;
   cursor: pointer;
   transform-origin: center;
 }
@@ -1199,6 +1205,11 @@ dialog p {
 }
 dialog p a:visited {
   color: rgb(var(--vs-primary));
+}
+
+.alignDialog {
+  margin-inline: auto;
+  top: 20%;
 }
 
 /*General Styles*/

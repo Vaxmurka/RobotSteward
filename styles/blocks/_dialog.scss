@@ -18,6 +18,12 @@ dialog {
     z-index: 2;
     backdrop-filter: blur(20px);
   }
+  &.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  }
   .x {
     filter: grayscale(1);
     border: none;
@@ -25,7 +31,7 @@ dialog {
     position: absolute;
     top: 15px;
     right: 10px;
-    transition: ease filter, transform 0.3s;
+    //transition: ease filter, transform 0.3s;
     cursor: pointer;
     transform-origin: center;
     &:hover {
@@ -48,6 +54,11 @@ dialog {
       }
     }
   }
+}
+
+.alignDialog {
+  margin-inline: auto;
+  top: 20%;
 }
 
 /*General Styles*/
