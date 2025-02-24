@@ -450,17 +450,21 @@ a {
   }
 }
 .shop__dialog_image {
-  width: 50%;
   display: flex;
   background-size: contain;
 }
 .shop__dialog_image img {
+  background-size: cover;
   border-radius: 20px;
+}
+@media (max-width: 767px) {
+  .shop__dialog_image img {
+    height: 250px;
+  }
 }
 .shop__dialog_content {
   display: flex;
   flex-direction: column;
-  width: 50%;
   justify-content: space-between;
 }
 .shop__dialog_content-text h1 {
@@ -1210,8 +1214,7 @@ dialog p a:visited {
 }
 
 .alignDialog {
-  margin-inline: auto;
-  top: 20%;
+  margin: auto;
 }
 
 /*General Styles*/

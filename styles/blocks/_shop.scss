@@ -125,17 +125,21 @@
     }
 
     &_image {
-      width: 50%;
       display: flex;
       background-size: contain;
     }
     &_image img {
+      background-size: cover;
       border-radius: 20px;
+
+      @include mobile() {
+        height: 250px;
+      }
     }
     &_content {
       display: flex;
       flex-direction: column;
-      width: 50%;
+      //width: 50%;
       justify-content: space-between;
 
       //@include mobile {
