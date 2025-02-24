@@ -342,6 +342,7 @@ a {
 .shop {
   display: grid;
   grid-template-columns: repeat(3, 320px);
+  grid-auto-rows: 350px;
   height: auto;
   justify-content: center;
   column-gap: 30px;
@@ -378,7 +379,8 @@ a {
   background-position: center;
   border-radius: 20px;
   width: 100%;
-  height: fit-content;
+  height: 250px;
+  max-height: 250px;
 }
 .shop__block_content {
   display: flex;
