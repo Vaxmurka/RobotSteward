@@ -37,6 +37,9 @@
         </div>
         <img id="stream-image">
     </div>
+    <div class="box">
+        <button class="button is-success" onclick="playPromotion()">Promotion</button>
+    </div>
     <div class="box" id="passport-box" style="display: none;">
         <p class="subtitle is-4 has-text-centered">Проверка паспорта</p>
 
@@ -135,6 +138,10 @@
             clearTimeout(faceTimeoutId);
             faceTimeoutId = NaN;
         }
+    }
+
+    function playPromotion() {
+        channel.send("play_promotion")
     }
 </script>
 
