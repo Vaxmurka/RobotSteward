@@ -518,6 +518,30 @@ span {
   font-size: 34px;
 }
 
+.baskets-block {
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-red);
+  border-radius: 50px;
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+@media (max-width: 767px) {
+  .baskets-block {
+    right: auto;
+    left: 20px;
+  }
+  .baskets-block svg {
+    width: 50%;
+    height: 50%;
+  }
+}
+
 .index {
   display: grid;
   grid-template-columns: repeat(3, 320px);
@@ -1270,6 +1294,24 @@ button.primary:hover {
 @media (max-width: 767px) {
   .header__logo {
     max-width: 160px;
+  }
+}
+.header__goHomeBtn {
+  width: 150px;
+  background-color: var(--color-red);
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  font-size: 20px;
+}
+@media (min-width: 768px) {
+  .header__goHomeBtn {
+    display: none;
   }
 }
 .header__menu {

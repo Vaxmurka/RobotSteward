@@ -26,6 +26,26 @@
     }
   }
 
+  &__goHomeBtn {
+    width: 150px;
+    background-color: var(--color-red);
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    color: white;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 48px;
+
+    font-size: 20px;
+
+    @include mobile-above() {
+      display: none;
+    }
+  }
+
   &__menu {
     display: flex;
     align-items: center;
