@@ -41,11 +41,12 @@
         <button class="button is-success" onclick="playPromotion()">Promotion</button>
         <button class="button is-danger" onclick="interruptAudio()()">Interrupt</button>
         <button class="button is-danger" onclick="channel.send('saratov')">Interrupt</button>
+        <
     </div>
     <div class="box" id="passport-box" style="display: none;">
         <p class="subtitle is-4 has-text-centered">Проверка паспорта</p>
 
-        <input class="input mr-3" type="text" placeholder="3620 876543" style="max-width: 250px;"/>
+        <input class="input mr-3" type="text" placeholder="1" style="max-width: 250px;"/>
         <button class="button is-success" onclick="submitPassport()">Submit</button>
         <button class="button is-danger ml-2" onclick="declinePassport()">Decline</button>
     </div>
@@ -86,7 +87,7 @@
     faceTimeoutId = NaN;
 
     function showPassportRequest() {
-        setActiveStream("documents_camera");
+        // setActiveStream("documents_camera");
 
         $("#passport-box").show();
         $("#passport-box input").val("");
