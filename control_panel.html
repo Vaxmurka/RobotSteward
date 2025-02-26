@@ -39,6 +39,8 @@
     </div>
     <div class="box">
         <button class="button is-success" onclick="playPromotion()">Promotion</button>
+        <button class="button is-danger" onclick="interruptAudio()()">Interrupt</button>
+        <button class="button is-danger" onclick="channel.send('saratov')">Interrupt</button>
     </div>
     <div class="box" id="passport-box" style="display: none;">
         <p class="subtitle is-4 has-text-centered">Проверка паспорта</p>
@@ -142,6 +144,10 @@
 
     function playPromotion() {
         channel.send("play_promotion")
+    }
+
+    function interruptAudio() {
+        channel.send("interrupt_audio");
     }
 </script>
 
