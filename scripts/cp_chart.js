@@ -17,7 +17,7 @@ window.addEventListener("channel_ready", function (event) {
 svg = null;
 
 const MAP_WIDTH = 900;
-const MAP_HEIGHT = 200;
+const MAP_HEIGHT = 260;
 const MAP_PADDING = 12;
 
 const ZERO_X = 150;
@@ -174,6 +174,8 @@ function drawChart(zones, points) {
     for (let i = 0; i < pointsGroup.children.length; i++) {
         pointsGroup.children[0].remove()
     }
+
+    console.log(zones, points);
 
     zones.forEach((z) => {
             const zoneSvg = produceZone(z);
