@@ -247,7 +247,8 @@ function produceSeat(point) {
     const [x, y] = toSVGPos(point.x, point.y);
     const seatNum = point.id.substring(5);
     const group = createSVGElement("g", {
-        id: "seat_" + seatNum
+        id: "seat_" + seatNum,
+        cursor: "pointer",
     });
 
     const border = createSVGElement("rect", {
@@ -267,12 +268,20 @@ function produceSeat(point) {
         "dominant-baseline": "middle",
         "text-anchor": "middle",
         fill: GRAY_MAIN,
-        "font-size": 30,
+        "font-size": 30
     });
     text.textContent = seatNum;
     group.append(text);
 
+    group.addEventListener("click", () => onSeatClicked(seatNum));
+
     return group;
+}
+
+function onSeatClicked(seatNum) {
+    fetch(`http://server:8002/carriage/call/?seat=${seatNum}`, {
+        method: "POST",
+    })
 }
 
 function produceMarker(point) {
