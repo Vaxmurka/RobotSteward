@@ -16,12 +16,14 @@ window.addEventListener("channel_ready", function (event) {
 
 svg = null;
 
-const MAP_WIDTH = 900;
-const MAP_HEIGHT = 260;
+//const MAP_WIDTH = 900;
+//const MAP_HEIGHT = 260;
+let MAP_WIDTH = 900;
+let MAP_HEIGHT = 260;
 const MAP_PADDING = 12;
 
-const ZERO_X = 150;
-const ZERO_Y = MAP_HEIGHT / 2;
+const ZERO_X = 44;
+let ZERO_Y = MAP_HEIGHT / 2;
 
 const ROBOT_WIDTH = 88;
 const ROBOT_HEIGHT = 26;
@@ -31,19 +33,7 @@ const GRAY_SUB = "#303030";
 const RED = "#FF5050";
 
 window.addEventListener("load", function() {
-    svg = document.getElementById('chartRoot');
 
-    setViewBox(0, 0, MAP_WIDTH + MAP_PADDING * 2, MAP_HEIGHT + MAP_PADDING * 2);
-
-    drawBorder();
-
-    drawZero();
-
-    addChart();
-
-    addPath();
-
-    addRobot(0, 0);
 });
 
 
@@ -58,6 +48,8 @@ function createSVGElement(tag, attrs) {
 // Функция для настройки viewBox (масштабирование и смещение начала координат)
 function setViewBox(x, y, width, height) {
     svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+    svg.setAttribute("width", `${width}px`);
+    svg.setAttribute("height", `${height}px`);
 }
 
 function drawBorder() {
@@ -164,7 +156,36 @@ function addChart() {
     svg.append(pointsGroup);
 }
 
+function getChartSize(zones) {
+    let minX = 10000, maxX = -10000, minY = 10000, maxY = -10000;
+    for (let zone of zones) {
+        minX = Math.min(minX, zone.p0[0], zone.p1[0])
+        maxX = Math.max(maxX, zone.p0[0], zone.p1[0])
+        minY = Math.min(minY, zone.p0[1], zone.p1[1])
+        maxY = Math.max(maxY, zone.p0[1], zone.p1[1])
+    }
+
+    return [maxX - minX + ZERO_X * 2, maxY - minY]
+}
+
 function drawChart(zones, points) {
+    [MAP_WIDTH, MAP_HEIGHT] = getChartSize(zones);
+    ZERO_Y = MAP_HEIGHT / 2;
+
+    svg = document.getElementById('chartRoot');
+
+    setViewBox(0, 0, MAP_WIDTH + MAP_PADDING * 2, MAP_HEIGHT + MAP_PADDING * 2);
+
+    drawBorder();
+
+    drawZero();
+
+    addChart();
+
+    addPath();
+
+    addRobot(0, 0);
+
     const zonesGroup = document.getElementById("zones");
     for (let i = 0; i < zonesGroup.children.length; i++) {
         zonesGroup.children[0].remove()
@@ -252,9 +273,9 @@ function produceSeat(point) {
     });
 
     const border = createSVGElement("rect", {
-        x: x - 25,
+        x: x - 31,
         y: y - 25,
-        width: 50,
+        width: 62,
         height: 50,
         rx: 6,
         stroke: GRAY_MAIN,
@@ -272,6 +293,19 @@ function produceSeat(point) {
     });
     text.textContent = seatNum;
     group.append(text);
+
+    if (point.direction != 0) {
+        const directionIndicator = createSVGElement("circle", {
+            cx: point.direction == 1 ? x + 21 : x - 21,
+            cy: y,
+            r: 2,
+            stroke: GRAY_MAIN,
+            fill: GRAY_SUB
+        });
+        group.append(directionIndicator)
+    }
+
+
 
     group.addEventListener("click", () => onSeatClicked(seatNum));
 
