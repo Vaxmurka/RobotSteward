@@ -22,7 +22,7 @@ let MAP_WIDTH = 900;
 let MAP_HEIGHT = 260;
 const MAP_PADDING = 12;
 
-const ZERO_X = 0;
+const ZERO_X = 44;
 let ZERO_Y = MAP_HEIGHT / 2;
 
 const ROBOT_WIDTH = 88;
@@ -165,7 +165,7 @@ function getChartSize(zones) {
         maxY = Math.max(maxY, zone.p0[1], zone.p1[1])
     }
 
-    return [maxX - minX + ZERO_X, maxY - minY]
+    return [maxX - minX + ZERO_X * 2, maxY - minY]
 }
 
 function drawChart(zones, points) {
@@ -274,9 +274,9 @@ function produceSeat(point) {
 
     const border = createSVGElement("rect", {
         x: x - 31,
-        y: y - 23,
+        y: y - 25,
         width: 62,
-        height: 46,
+        height: 50,
         rx: 6,
         stroke: GRAY_MAIN,
         fill: GRAY_SUB
