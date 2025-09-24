@@ -273,9 +273,9 @@ function produceSeat(point) {
     });
 
     const border = createSVGElement("rect", {
-        x: x - 31,
+        x: x - 35,
         y: y - 25,
-        width: 62,
+        width: 70,
         height: 50,
         rx: 6,
         stroke: GRAY_MAIN,
