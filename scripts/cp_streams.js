@@ -2,6 +2,31 @@
 const streams = {};
 var activeStream = null;
 
+// аудио-монитор микрофона робота — включается вместе со стримом камеры
+var audioMonitor = null;
+
+function audioStreamUrl() {
+    const proto = location.protocol === "https:" ? "wss:" : "ws:";
+    return `${proto}//${location.host}/relay/ws/control_panel/audio`;
+}
+
+function ensureAudioMonitor() {
+    if (!audioMonitor) {
+        audioMonitor = new WSAudioStream(audioStreamUrl(), 16000);
+    }
+    return audioMonitor;
+}
+
+// регулятор громкости панели: 0..3 (усиление до x3)
+function onVolumeChanged(v) {
+    const vol = parseFloat(v);
+    const label = document.getElementById("volume-value");
+    if (label) {
+        label.innerText = Math.round(vol * 100) + "%";
+    }
+    ensureAudioMonitor().setVolume(vol);
+}
+
 window.addEventListener("channel_ready", function (event) {
 
     event.detail.channel.addEventListener("code_stream", function(event) {
@@ -65,6 +90,9 @@ function setActiveStream(id) {
     activeStream = stream;
     document.getElementById(`stream-button-${id}`).classList.add("is-active");
     activeStream.stream.begin();
+
+    // звук с микрофона робота — всегда, пока смотрим камеру
+    ensureAudioMonitor().begin();
 }
 
 function stopActiveStream() {
@@ -73,6 +101,9 @@ function stopActiveStream() {
     }
 
     activeStream.stream.stop();
+    if (audioMonitor) {
+        audioMonitor.stop();
+    }
     var tabsList = document.getElementById("streams-tabs").getElementsByTagName("ul")[0];
     tabsList.childNodes.forEach((el) => {
         el.classList?.remove("is-active");

@@ -28,6 +28,7 @@
     </style>
 
     <script src="/static/scripts/ws_video_stream.js"></script>
+    <script src="/static/scripts/ws_audio_stream.js"></script>
     <script src="/static/scripts/gui_channel.js"></script>
 
 </head>
@@ -42,6 +43,13 @@
             </ul>
         </div>
         <img id="stream-image">
+        <div class="field mt-3">
+            <label class="label is-small mb-1" for="volume-range">
+                Громкость: <span id="volume-value">100%</span>
+            </label>
+            <input id="volume-range" type="range" min="0" max="3" step="0.05" value="1"
+                   style="width: 100%;" oninput="onVolumeChanged(this.value)">
+        </div>
     </div>
     <div class="box">
         <button class="button is-success" onclick="playPromotion()">Promotion</button>
