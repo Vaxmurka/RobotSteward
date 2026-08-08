@@ -8,7 +8,9 @@ class GUIChannel extends EventTarget {
     }
 
     connect() {
-        this.socket = new WebSocket("ws://robot:8001" + this.path);
+        // control-канал панели идёт через реле на сервере (тот же хост, что отдал страницу)
+        const proto = location.protocol === "https:" ? "wss:" : "ws:";
+        this.socket = new WebSocket(`${proto}//${location.host}/relay/ws${this.path}`);
         var path = this.path;
         var _channel = this;
         this.socket.onopen = function() {
