@@ -55,7 +55,22 @@
         <button class="button is-success" onclick="playPromotion()">Promotion</button>
         <button class="button is-danger" onclick="interruptAudio()()">Interrupt</button>
         <button class="button is-danger" onclick="channel.send('saratov')">Interrupt</button>
-        <
+    </div>
+    <div class="box">
+        <p class="subtitle is-4 has-text-centered">Речь</p>
+        <div class="field">
+            <textarea id="tts-text" class="textarea" rows="2"
+                      placeholder="Текст для озвучивания роботом"
+                      onkeydown="if (event.ctrlKey && event.key === 'Enter') sendTTS()"></textarea>
+        </div>
+        <div class="field is-grouped">
+            <p class="control">
+                <button class="button is-success" onclick="sendTTS()">Сказать</button>
+            </p>
+            <p class="control">
+                <button class="button is-danger" onclick="stopTTS()">Прервать речь</button>
+            </p>
+        </div>
     </div>
     <div class="box" id="passport-box" style="display: none;">
         <p class="subtitle is-4 has-text-centered">Проверка паспорта</p>
@@ -165,6 +180,30 @@
 
     function interruptAudio() {
         channel.send("interrupt_audio");
+    }
+
+    // Отдельный канал команд управления (речь; в перспективе — движение, голова,
+    // ящики и т.п.). Транспорт тот же, что у панели, но путь другой.
+    const remoteControl = new GUIChannel("/control_panel/remote_control");
+    remoteControl.connect();
+
+    function sendCommand(domain, action, params) {
+        const socket = remoteControl.socket;
+        if (!socket || socket.readyState !== WebSocket.OPEN) {
+            console.warn("Remote control channel is not connected yet");
+            return;
+        }
+        remoteControl.send("command", {domain: domain, action: action, params: params || {}});
+    }
+
+    function sendTTS() {
+        const text = $("#tts-text").val();
+        if (!text.trim()) return;
+        sendCommand("tts", "say", {text: text});
+    }
+
+    function stopTTS() {
+        sendCommand("tts", "stop");
     }
 </script>
 
